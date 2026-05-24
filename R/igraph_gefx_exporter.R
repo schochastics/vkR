@@ -21,7 +21,7 @@ saveAsGEXF <- function(g, filepath="converted_graph.gexf") {
     igraph::E(g)$weight <- rep.int(1, igraph::ecount(g))
 
   nodes <- data.frame(cbind(igraph::V(g), igraph::V(g)$label))
-  edges <- t(Vectorize(igraph::get.edge, vectorize.args='id')(g, 1:igraph::ecount(g)))
+  edges <- t(Vectorize(igraph::ends, vectorize.args='id')(g, 1:igraph::ecount(g)))
 
   # combine all node attributes into a matrix (and take care of & for xml)
   vAttrNames <- setdiff(igraph::list.vertex.attributes(g), "label")
